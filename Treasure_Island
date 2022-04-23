@@ -1,0 +1,21 @@
+#Treasure Island Text based Game
+
+cross_road = input("You\'re at a crossroad. Where do you want to go? Type \"left\" or \"right\"\n ").lower()
+if cross_road == "left":
+  print("You died a horrible death")
+elif cross_road == "right":
+  print("You\'ve come to a lake. There is an island in the middle of the lake.")
+  lake_cross = input("Type \"wait\" to wait for a boat. Type \"swim\" to swim across. ").lower()
+  if lake_cross == "wait":
+    print("You waited too long and died")
+  elif lake_cross == "swim":
+    print("Congrats, you can swim")
+    print("You arrive at the island. There is a house with 3 doors")
+    print("One red, one yellow, and one blue")
+    door = input("Which colour do you choose? ").lower()
+    if door == "yellow":
+      print("That door is locked, you go home.")
+    elif door == "red":
+      print("ouch")
+    elif door == "blue":
+      print("Congrats, you found the treasure!")
