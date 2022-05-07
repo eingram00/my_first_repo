@@ -1,0 +1,29 @@
+from replit import clear
+#from art import logo
+print(logo)
+end_of_bids = False
+
+bid_dict = {}
+def highest_bid(bid_record):
+  highest_bid = 0
+  # for loop with dict loops through KEYS
+  for bid_person in bid_record:
+    bid_amount = bid_record[bid_person]
+    if bid_amount > highest_bid:
+      highest_bid = bid_amount
+      highest_bidder = bid_person
+
+  print(f"The highest bidder is {highest_bidder} with a bid of ${highest_bid}")
+      
+while not end_of_bids:
+  bidder = input("What is your name? ")
+  # make sure to turn your input string to int
+  bid_price = int(input("How much do you want to bid? $")) 
+  bid_dict[bidder] = bid_price
+  
+  go_again = input("Is anyone else going to bid? ")
+  if go_again == "no":
+    end_of_bids = True
+    highest_bid(bid_dict)
+  elif go_again == "yes":
+    clear()
