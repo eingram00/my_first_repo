@@ -1,0 +1,43 @@
+#from replit import clear
+#from art import logo
+
+# Addition
+def add(n1, n2):
+  return n1 + n2
+
+# Subtraction
+def subtract(n1, n2):
+  return n1 - n2
+
+# Multiplication
+def multiply(n1, n2):
+  return n1 * n2
+
+# Division
+def divide(n1, n2):
+  return n1 / n2
+
+def calculator():
+  #print(logo)
+  calc_dict = {"+": add, "-": subtract, "*": multiply, "/": divide}
+  num1 = float(input("What is your first number? "))
+  
+  for i in calc_dict:
+    print(i)
+  
+  should_continue = True
+  while should_continue:
+    op_choice = input("What Operation will you choose? ")
+    num2 = float(input("What is your next number? "))
+    calculation = calc_dict[op_choice]
+    answer = calculation(num1, num2)
+    print(f"{num1} {op_choice} {num2} = {answer}")
+  
+    if input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ") == 'y':
+      num1 = answer
+    else:
+      should_continue = False
+      #clear()
+      calculator()
+
+calculator()
