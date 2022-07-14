@@ -1,0 +1,78 @@
+from replit import clear
+from art import logo
+import random
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+user_cards = [11]
+computer_cards = []
+keep_playing = True
+
+def deal_card():
+  card = cards[random.randint(0,12)]
+  return card
+
+#user_cards.append(deal_card())
+user_cards.append(deal_card())
+computer_cards.append(deal_card())
+computer_cards.append(deal_card())
+
+def calculate_score(card_list):
+  card_total = sum(card_list)
+  for card in card_list:
+    if card == 11 and card_total > 21:
+      card_list.remove(11)
+      card_list.append(1)
+  if card_total == 21 and len(card_list) == 2:
+    keep_playing = False
+    return 0
+  return card_total
+
+print(logo)
+print("Welcome to my BlackJack game! ")
+play_game = input("Do you want to play a game of blackjack? 'y' for yes and 'n' for no: ")
+if play_game == 'y':
+  keep_playing = True
+elif play_game == 'n':
+  keep_playing = False
+else:
+  print("That's not a valid response")
+
+while keep_playing:
+  user_score = calculate_score(user_cards)
+  computer_score = calculate_score(computer_cards)
+
+  print(f"Your cards: {user_cards}, Your Score: {user_score}")
+  print(f"Dealer's First Card: {computer_cards[1]}")
+
+  choice = input("type 'hit' to get another card or 'pass' to stay: ")
+  if choice == 'hit':
+    user_cards.append(deal_card())
+      
+  else:
+    keep_playing = False
+
+
+while computer_score < 17 and computer_score != 0:
+  computer_cards.append(deal_card())
+  computer_score = calculate_score(computer_cards)
+  print(user_cards, computer_cards)
+  print(user_score, computer_score)
+
+def compare(user_score, computer_score):
+  if user_score == computer_score:
+    return "draw"
+  elif user_score == 0:
+    return "BlackJack, You Win"
+  elif computer_score == 0:
+    return "Dealer Wins"
+  elif user_score > 21:
+    return "You Bust"
+  elif computer_score > 21:
+    return "Dealer Busts"
+  elif user_score > computer_score:
+    return "You Win"
+  else:
+    return "Dealer Wins"
+
+print(f"You final score: {user_score}")
+print(f"Dealer's final score: {computer_score}")
+print(compare(user_score, computer_score))
