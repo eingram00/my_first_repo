@@ -1,0 +1,52 @@
+#from art import logo
+import random
+
+EASY_LEVEL = 10
+HARD_LEVEL = 5
+
+#How many guesses is the user going to get
+def difficulty():
+  how_hard = input("Difficulty - Easy or Hard: ")
+  if how_hard == "easy":
+    return EASY_LEVEL
+
+  elif how_hard == "hard":
+    return HARD_LEVEL
+
+#How close is the user to the final answer
+def check_answer(guess, answer, level_choice):
+  if guess == answer:
+    print("You guessed it!")
+    return answer
+  elif guess > answer:
+    print("Too High")
+    return level_choice - 1
+  elif guess < answer:
+    print("Too Low")
+    return level_choice - 1
+
+#Run the game
+def game():
+  final_answer = random.randint(1, 100)
+  #print(logo)
+  print("Welcome to my number guessing game")
+  print("I'm thinking of a number between 1 and 100")
+  #print(f"The answer is {final_answer}")
+  level_choice = difficulty()
+
+  user_guess = int(input("What's your guess? "))
+  
+  while level_choice != 0:
+    level_choice = check_answer(user_guess, final_answer, level_choice)
+    print(f"You have {level_choice} guesses left")
+    user_guess = int(input("Guess Again: "))
+    
+    if user_guess == final_answer:
+      print(f"Congrats you won, the answer was {final_answer}")
+      return
+
+    elif level_choice == 1:
+      print("You ran out of lives")
+      return
+      
+game()
