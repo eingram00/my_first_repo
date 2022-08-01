@@ -1,0 +1,47 @@
+### This is not a complete code set
+### It does not yet work properly
+
+from replit import clear
+from game_data import data
+from random import randint
+import art
+
+#Choices cannot be global variables
+#Choice B will become Choice A if correct
+
+def generate_account():  
+  # 50 options
+  account_choice = randint(1,50)
+  random_account = data[account_choice]
+  return random_account
+  
+def format_accounts(account_format):
+  name = account_format["name"]
+  description = account_format["description"]
+  country = account_format["country"]
+  follower_count = account_format["follower_count"]
+  return f"{name}, a {description}, from {country}"
+
+def user_answer(user_choice, account_A, account_B):
+    if user_choice == "A" and account_A['follower_count'] > account_B['follower_count']:
+      print("You Win")
+    elif user_choice == "B" and account_A['follower_count'] < account_B['follower_count']:
+      print("You Win")
+    else:
+      print(f"count A: {account_A['follower_count']}; count B: {account_B['follower_count']}")
+      wrong = True
+
+def game():
+  wrong = False
+  while not wrong:
+    print(art.logo)
+    random_account_A = generate_account()
+    random_account_B = generate_account()
+    print(f"Compare A: {format_accounts(random_account_A)}")
+    print(art.vs)
+    print(f"Compare B: {format_accounts(random_account_B)}")
+    user_choice = input("Who has more followers? Type 'A' or 'B': ")
+    user_answer(user_choice, random_account_A, random_account_B)
+    #wrong = True
+
+game()
